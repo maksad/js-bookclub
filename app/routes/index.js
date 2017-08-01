@@ -1,7 +1,7 @@
 'use strict';
 
 const path = process.cwd();
-const ImageHandler = require(path + '/app/controllers/imageHandler.server.js');
+const BookHandler = require(path + '/app/controllers/BookHandler.server.js');
 
 module.exports = function (app, passport) {
   function isLoggedIn(req, res, next) {
@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
     }
   }
 
-  const imageHadler = new ImageHandler();
+  const bookHadler = new BookHandler();
 
   app.route('/login')
     .get(function (req, res) {
@@ -40,19 +40,12 @@ module.exports = function (app, passport) {
     }));
 
   app.route('/')
-    .get(imageHadler.allImages);
+    .get(function (req, res) {
+      res.render('home');
+    });
 
   app.route('/profile')
     .get(isLoggedIn, function (req, res) {
       res.render('profile');
     });
-
-  app.route('/my-images')
-    .get(isLoggedIn, imageHadler.myImages);
-
-  app.route('/my-images')
-    .post(isLoggedIn, imageHadler.newImage);
-
-  app.route('/delete/:id')
-    .get(isLoggedIn, imageHadler.deleteImage);
 };
