@@ -7,9 +7,21 @@ var User = new Schema({
   twitter: {
     id: String,
     displayName: String,
-    username: String,
-    photoUrl: String
-  }
+    userName: String,
+    photoUrl: String,
+  },
+  fullName: {
+    type: String,
+    default: '',
+  },
+  state: {
+    type: String,
+    default: '',
+  },
+  city: {
+    type: String,
+    default: '',
+  },
 });
 
 module.exports = mongoose.model('User', User);
