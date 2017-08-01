@@ -1,0 +1,21 @@
+style(type='text/css').
+  #display-name {
+    margin-left: 5px;
+  }
+
+nav
+  div(class="nav-wrapper")
+    .container
+      a(href="/" class="brand-logo hide-on-small-only hide-on-med-only") Js BookClub
+      ul(id="nav-mobile" class="right")
+        li.hide
+          a.menu(href='/') Welcome,
+            span#display-name
+        li
+          a.menu(href='/') Home
+        li.hide
+          a.menu(href='/my-images') My images
+        li.hide
+          a.menu(href='/logout') Logout
+        li#login-link
+          a.menu(href='/auth/twitter/?search=' + searchTerm) Login

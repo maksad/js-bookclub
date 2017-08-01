@@ -1,0 +1,42 @@
+style(type='text/css').
+  .remove-shadow{
+    box-shadow: none !important;
+  }
+  .grid-item {
+    width: 200px;
+    padding-right: 20px;
+  }
+
+  .grid-item--width2 {
+    width: 400px;
+    padding-right: 20px;
+  }
+
+  .card-content {
+    padding: 9px !important;
+  }
+
+
+.grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }')
+  each image in JSON.parse(images)
+    .grid-item
+      .card
+        .card-image
+          img.materialboxed(src=image.link, onerror='imgError(this);')
+        if image.description
+          .card-content
+            p= image.description
+        if deleteIsVisible
+          .card-action
+            a.red-text(href='delete/' + image._id) Delete
+
+script.
+  $(document).ready(function(){
+      $('.materialboxed').materialbox();
+  });
+
+  function imgError(image) {
+    image.onerror = '';
+    image.src = 'http://www.beyondcompetition.biz/wp-content/themes/venera-by-osetin/images/placeholder-camera-green.png';
+    return true;
+  }
