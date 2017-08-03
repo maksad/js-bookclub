@@ -48,4 +48,7 @@ module.exports = function (app, passport) {
     .get(isLoggedIn, function (req, res) {
       res.render('profile');
     });
+
+  app.route('/my-books')
+    .get(isLoggedIn, bookHadler.myBooks);
 };

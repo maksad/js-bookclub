@@ -1,0 +1,38 @@
+extends layout.pug
+
+block content
+  style.
+    form {
+      padding: 20px;
+      background: #f1f1f1;
+      margin-top: 28px;
+      margin-bottom: 33px;
+    }
+
+  form.col.s12(action='/my-books', method='POST')
+    .row.search-field
+      .input-field.col.s12
+        input(type='text', name='bookName')
+        label(
+          for='bookName'
+        ) Type the name of a book
+
+
+      .input-field.col.s12
+        button.waves-effect.waves-light.btn(type='submit') Submit
+
+  if error
+    .row
+      .col.s12
+        .card.red.lighten-5.col.s12.remove-shadow
+          .card-content.col.s12
+            p= error
+
+  if message
+    .row
+      .col.s12
+        .card.green.lighten-5.col.s12.remove-shadow
+          .card-content.col.s12
+            p= message
+
+  include _list_of_books.pug
