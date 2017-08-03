@@ -40,9 +40,7 @@ module.exports = function (app, passport) {
     }));
 
   app.route('/')
-    .get(function (req, res) {
-      res.render('home');
-    });
+    .get(bookHadler.allBooks);
 
   app.route('/profile')
     .get(isLoggedIn, function (req, res) {

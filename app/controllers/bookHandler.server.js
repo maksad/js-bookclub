@@ -79,6 +79,23 @@ function BookHandler() {
       }
     }
   }
+
+  this.allBooks = (req, res) => {
+    Book
+      .find()
+      .exec((error, result) => {
+        let errorMessage = req.query.error;
+
+        if (error) {
+          errorMessage = 'Something went wrong or perhaps the library does not have any book.';
+        }
+
+        res.render('home', {
+          error: errorMessage,
+          books: JSON.stringify(result)
+        });
+      });
+  }
 }
 
 module.exports = BookHandler;
