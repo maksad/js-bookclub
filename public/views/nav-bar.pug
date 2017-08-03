@@ -1,23 +1,21 @@
 style(type='text/css').
-  #display-name {
+  .display-name {
     margin-left: 5px;
   }
 
-nav
-  div(class="nav-wrapper")
-    .container
-      a(href="/" class="brand-logo hide-on-small-only hide-on-med-only") Js BookClub
-      ul(id="nav-mobile" class="right")
-        li.hide
-          a.menu(href='/') Welcome,
-            span#display-name
-        li
-          a.menu(href='/') Home
-        li.hide
-          a.menu(href='/my-books') My books
-        li.hide
-          a.menu(href='/profile') Profile
-        li.hide
-          a.menu(href='/logout') Logout
-        li#login-link
-          a.menu(href='/auth/twitter/?search=' + searchTerm) Login
+nav(role='navigation')
+  .nav-wrapper
+    a#logo-container.brand-logo(href='#') Js BookClub
+    ul.right.hide-on-med-and-down
+      include _nav-bar-list.pug
+    ul#nav-mobile.side-nav(style='left: 0px;')
+      include _nav-bar-list.pug
+    a.button-collapse(
+      href='#', data-activates='nav-mobile'
+    )
+      i.material-icons menu
+
+script.
+  $( document ).ready(function() {
+    $(".button-collapse").sideNav();
+  });

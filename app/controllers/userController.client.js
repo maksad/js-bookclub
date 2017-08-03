@@ -4,11 +4,11 @@
   var profileId = document.querySelector('#profile-id') || null;
   var profileUsername = document.querySelector('#profile-username') || null;
   var profileRepos = document.querySelector('#profile-repos') || null;
-  var displayName = document.querySelector('#display-name');
+  var displayName = document.querySelectorAll('.display-name');
   var apiUrl = appUrl + '/api/:id';
 
   function displayPrivateNavLinks() {
-    var navbarElements = document.querySelectorAll('header nav #nav-mobile li');
+    var navbarElements = document.querySelectorAll('header nav li');
     for (var elem of navbarElements) {
       elem.classList.remove('hide');
     }
@@ -24,7 +24,9 @@
     var userObject = JSON.parse(data);
 
     if (userObject.displayName !== null) {
-      updateHtmlElement(userObject, displayName, 'displayName');
+      for (var elem of displayName) {
+        updateHtmlElement(userObject, elem, 'displayName');
+      }
     } else {
       updateHtmlElement(userObject, displayName, 'username');
     }
