@@ -96,6 +96,30 @@ function BookHandler() {
         });
       });
   }
+
+  this.deleteBook = function(req, res) {
+    const bookId = req.params.id;
+
+    if (!bookId) {
+      return res
+        .status(400)
+        .json({'error': 'Book id is missing'});
+    }
+
+    Book
+      .findOneAndRemove({
+        'id': bookId,
+        'owner': req.user.twitter.id
+      })
+      .catch((err) => {
+        const error = 'Something went wrong. We can\'t remove this book from your collection';
+        return res.redirect('/my-book?error=' + error);
+      })
+      .then(() => {
+        const message = 'The book was removed from your collection';
+        return res.redirect('/my-books?message=' + message);
+      });
+  }
 }
 
 module.exports = BookHandler;

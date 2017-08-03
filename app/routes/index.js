@@ -52,4 +52,7 @@ module.exports = function (app, passport) {
 
   app.route('/my-books')
     .post(isLoggedIn, bookHadler.addNewBook);
+
+  app.route('/delete/:id')
+    .get(isLoggedIn, bookHadler.deleteBook);
 };
