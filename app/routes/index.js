@@ -51,4 +51,7 @@ module.exports = function (app, passport) {
 
   app.route('/my-books')
     .get(isLoggedIn, bookHadler.myBooks);
+
+  app.route('/my-books')
+    .post(isLoggedIn, bookHadler.addNewBook);
 };
