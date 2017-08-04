@@ -47,6 +47,9 @@ module.exports = function (app, passport) {
   app.route('/profile')
     .get(isLoggedIn, uesrHandler.getProfile);
 
+  app.route('/profile')
+    .post(isLoggedIn, uesrHandler.updateUserInfo);
+
   app.route('/my-books')
     .get(isLoggedIn, bookHadler.myBooks);
 

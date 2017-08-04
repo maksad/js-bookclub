@@ -23,3 +23,16 @@ block content
           span= user.state
         else
           span N/A
+
+  form.col.s12(action='/profile', method='POST')
+    .row.search-field
+      .input-field.col.s12
+        input(type='text', name='city')
+        label(for='city') Type your city's name
+
+      .input-field.col.s12
+        input(type='text', name='state')
+        label(for='state') Type your states's name
+
+      .input-field.col.s12
+        button.waves-effect.waves-light.btn(type='submit') Submit
