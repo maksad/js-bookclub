@@ -2,6 +2,7 @@
 
 const path = process.cwd();
 const BookHandler = require(path + '/app/controllers/BookHandler.server.js');
+const UesrHandler = require(path + '/app/controllers/UserHandler.server.js');
 
 module.exports = function (app, passport) {
   function isLoggedIn(req, res, next) {
@@ -13,6 +14,7 @@ module.exports = function (app, passport) {
   }
 
   const bookHadler = new BookHandler();
+  const uesrHandler = new UesrHandler();
 
   app.route('/login')
     .get(function (req, res) {
@@ -43,9 +45,7 @@ module.exports = function (app, passport) {
     .get(bookHadler.allBooks);
 
   app.route('/profile')
-    .get(isLoggedIn, function (req, res) {
-      res.render('profile');
-    });
+    .get(isLoggedIn, uesrHandler.getProfile);
 
   app.route('/my-books')
     .get(isLoggedIn, bookHadler.myBooks);

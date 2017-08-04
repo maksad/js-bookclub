@@ -2,15 +2,24 @@
 extends layout.pug
 
 block content
-  .container
-    .twitter-profile
-      img(src='/public/img/gh-mark-32px.png', alt='twitter logo')
-      p
-        span ID:
-        span#profile-id.profile-value
-      p
-        span Username:
-        span#profile-username.profile-value
-      p
-        span Repositories:
-        span#profile-repos.profile-value
+  style.
+    .location span {
+      margin-left: 7px;
+    }
+
+  - var user = JSON.parse(userData);
+
+  ul.collection
+    li.collection-item.avatar
+      img.circle(src=user.twitter.photoUrl, alt=user.twitter.displayName)
+      span.title= user.twitter.displayName
+      p.location city:
+        if user.city
+          span= user.city
+        else
+          span N/A
+      p.location state:
+        if user.state
+          span= user.state
+        else
+          span N/A

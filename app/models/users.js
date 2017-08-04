@@ -10,10 +10,6 @@ var User = new Schema({
     userName: String,
     photoUrl: String,
   },
-  fullName: {
-    type: String,
-    default: '',
-  },
   state: {
     type: String,
     default: '',
