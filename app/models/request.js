@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var Request = new Schema({
-  personId: String,
+  requesterId: String,
   ownerId: String,
-  bookTitle: String,
   bookId: String,
+  bookTitle: String,
   approved: {
     type: Boolean,
     default: false
