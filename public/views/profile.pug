@@ -13,19 +13,28 @@ block content
     li.collection-item.avatar
       img.circle(src=user.twitter.photoUrl, alt=user.twitter.displayName)
       span.title= user.twitter.displayName
-      p.location city:
+      p.info city:
         if user.city
           span= user.city
         else
           span N/A
-      p.location state:
+      p.info state:
         if user.state
           span= user.state
+        else
+          span N/A
+      p.info name:
+        if user.name
+          span= user.name
         else
           span N/A
 
   form.col.s12(action='/profile', method='POST')
     .row.search-field
+      .input-field.col.s12
+        input(type='text', name='name')
+        label(for='name') Type your full name
+
       .input-field.col.s12
         input(type='text', name='city')
         label(for='city') Type your city's name

@@ -15,6 +15,7 @@ function UserHandler() {
   this.updateUserInfo = (req, res) => {
     const city = req.body.city;
     const state = req.body.state;
+    const name = req.body.name;
 
     if (!city) {
       return res.status(400).json({error: 'City field cannot be empty.'})
@@ -24,6 +25,10 @@ function UserHandler() {
       return res.status(400).json({error: 'State field cannot be empty.'})
     }
 
+    if (!name) {
+      return res.status(400).json({error: 'Name field cannot be empty.'})
+    }
+
     User
       .findOne({'twitter.id': req.user.twitter.id})
       .exec((error, user) => {
@@ -31,6 +36,7 @@ function UserHandler() {
 
         user.city = city;
         user.state = state;
+        user.name = name;
 
         return user
           .save()
