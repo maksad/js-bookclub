@@ -22,4 +22,26 @@ block content
 
 
   include _message.pug
+
+  h5 Requets to approve
+  include _requests_to_approve.pug
+
+  hr
+  h5 Your requested book
+
+  hr
+  h5 My books
   include _list_of_books.pug
+
+
+
+  script.
+    $(document).ready(function(){
+        $('.materialboxed').materialbox();
+    });
+
+    function imgError(image) {
+      image.onerror = '';
+      image.src = 'http://www.beyondcompetition.biz/wp-content/themes/venera-by-osetin/images/placeholder-camera-green.png';
+      return true;
+    }

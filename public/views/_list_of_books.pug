@@ -1,22 +1,3 @@
-style(type='text/css').
-  .remove-shadow{
-    box-shadow: none !important;
-  }
-  .grid-item {
-    width: 200px;
-    padding-right: 20px;
-  }
-
-  .grid-item--width2 {
-    width: 400px;
-    padding-right: 20px;
-  }
-
-  .card-content {
-    padding: 9px !important;
-  }
-
-
 .grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }')
   each book in JSON.parse(books)
     .grid-item
@@ -35,14 +16,3 @@ style(type='text/css').
             ) Request
 
           a.blue-text(href=book.link target='_blank') Open
-
-script.
-  $(document).ready(function(){
-      $('.materialboxed').materialbox();
-  });
-
-  function imgError(image) {
-    image.onerror = '';
-    image.src = 'http://www.beyondcompetition.biz/wp-content/themes/venera-by-osetin/images/placeholder-camera-green.png';
-    return true;
-  }

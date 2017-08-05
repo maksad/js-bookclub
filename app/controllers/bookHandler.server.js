@@ -2,25 +2,38 @@
 
 const gBooks = require('google-books-search');
 const Book = require('../models/book');
+const Request = require('../models/request');
 
 function BookHandler() {
   this.myBooks = (req, res) => {
     Book
       .find({owner: req.user.twitter.id})
-      .exec((error, result) => {
+      .exec((error, books) => {
         let errorMessage = req.query.error;
-
         if (error) {
           errorMessage = 'Something went wrong or perhaps you don\'t have any book';
         }
 
-        res.render('my-books', {
-          error: errorMessage,
+        Request
+          .find({ownerId: req.user.twitter.id})
+          .exec((err, requestsToApprove) => {
+            return renderResponse(
+              errorMessage,
+              books,
+              requestsToApprove
+            );
+          });
+      });
+
+      function renderResponse(error, books, requestsToApprove) {
+        return res.render('my-books', {
+          error: error,
           message: req.query.message,
-          books: JSON.stringify(result),
+          books: JSON.stringify(books),
+          requestsToApprove: JSON.stringify(requestsToApprove),
           deleteIsVisible: true
         });
-      });
+      }
   }
 
   this.addNewBook = (req, res) => {

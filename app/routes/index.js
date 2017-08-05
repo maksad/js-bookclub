@@ -63,4 +63,7 @@ module.exports = function (app, passport) {
 
   app.route('/request/:bookId/:requesterId')
     .get(isLoggedIn, requestHandler.makeRequest);
+
+  app.route('/request-approve/:id')
+    .get(isLoggedIn, requestHandler.approve);
 };

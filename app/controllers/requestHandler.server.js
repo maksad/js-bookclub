@@ -17,7 +17,6 @@ function RequestHandler() {
       .findOne({id: bookId})
       .exec((err, book) => {
         if (err) { return err }
-
         const request = new Request({
           requesterId: requesterId,
           ownerId: book.owner,
@@ -25,9 +24,33 @@ function RequestHandler() {
           bookTitle: book.title
         });
 
-        const message = 'You just requested "' + book.title + '"';
-        return res.redirect('/?message=' + message);
+        request
+          .save()
+          .then(() => {
+            const message = 'You just requested "' + book.title + '"';
+            return res.redirect('/?message=' + message);
+          })
       })
+  }
+
+  this.approve = (req, res) => {
+    const requestId = req.params.id;
+
+    if (!requestId) {
+      return res.status(400).json({error: 'requestId is required!'});
+    }
+
+    Request
+      .findByIdAndUpdate(
+        requestId,
+        {approved: true},
+        {new: false},
+        function(err, request) {
+          if (err) { return err }
+
+          const message = 'Request approved.';
+          return res.redirect('/my-books?message=' + message);
+        })
   }
 }
 

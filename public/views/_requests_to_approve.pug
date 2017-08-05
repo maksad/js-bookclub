@@ -1,0 +1,15 @@
+.grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }')
+  each request in JSON.parse(requestsToApprove)
+    .grid-item
+      .card
+        .card-content
+          p= request.bookTitle
+        .card-action
+            a.red-text(href='/request-delete/' + request._id) Delete
+            if request.approved
+              a.green-text(href='#') Approved
+            else
+              a.blue-text(href='/request-approve/' + request._id) Approve
+
+  if JSON.parse(requestsToApprove).length == 0
+    p You have no requests to approve
