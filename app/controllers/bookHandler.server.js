@@ -17,20 +17,28 @@ function BookHandler() {
         Request
           .find({ownerId: req.user.twitter.id})
           .exec((err, requestsToApprove) => {
-            return renderResponse(
-              errorMessage,
-              books,
-              requestsToApprove
-            );
+
+            Request
+              .find({requesterId: req.user.twitter.id})
+              .exec((err, yourRequests) => {
+                return renderResponse(
+                  errorMessage,
+                  books,
+                  requestsToApprove,
+                  yourRequests
+                );
+              });
+
           });
       });
 
-      function renderResponse(error, books, requestsToApprove) {
+      function renderResponse(error, books, requestsToApprove, yourRequests) {
         return res.render('my-books', {
           error: error,
           message: req.query.message,
           books: JSON.stringify(books),
           requestsToApprove: JSON.stringify(requestsToApprove),
+          yourRequests: JSON.stringify(yourRequests),
           deleteIsVisible: true
         });
       }

@@ -11,5 +11,5 @@
             else
               a.blue-text(href='/request-approve/' + request._id) Approve
 
-  if JSON.parse(requestsToApprove).length == 0
-    p You have no requests to approve
+if JSON.parse(requestsToApprove).length == 0
+  p You have no requests to approve

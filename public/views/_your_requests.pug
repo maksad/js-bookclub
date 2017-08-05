@@ -1,0 +1,9 @@
+.grid(data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }')
+  each request in JSON.parse(yourRequests)
+    .grid-item
+      .card
+        .card-content
+          p= request.bookTitle
+
+if JSON.parse(yourRequests).length == 0
+  p You have not requested any book.
