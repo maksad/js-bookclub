@@ -66,4 +66,8 @@ module.exports = function (app, passport) {
 
   app.route('/request-approve/:id')
     .get(isLoggedIn, requestHandler.approve);
+
+
+  app.route('/request-delete/:id')
+    .get(isLoggedIn, requestHandler.delete);
 };

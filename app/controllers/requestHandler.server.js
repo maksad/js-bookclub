@@ -52,6 +52,23 @@ function RequestHandler() {
           return res.redirect('/my-books?message=' + message);
         })
   }
+
+  this.delete = (req, res) => {
+    const requestId = req.params.id;
+
+    if (!requestId) {
+      return res.status(400).json({error: 'requestId is required!'});
+    }
+
+    Request
+      .findByIdAndRemove(
+        requestId,
+        function(err, request) {
+          if (err) { return err }
+          const message = 'Request deleted.';
+          return res.redirect('/my-books?message=' + message);
+        })
+  }
 }
 
 module.exports = RequestHandler;
