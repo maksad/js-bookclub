@@ -1,8 +1,9 @@
 'use strict';
 
 const path = process.cwd();
-const BookHandler = require(path + '/app/controllers/BookHandler.server.js');
-const UesrHandler = require(path + '/app/controllers/UserHandler.server.js');
+const BookHandler = require(path + '/app/controllers/bookHandler.server.js');
+const UesrHandler = require(path + '/app/controllers/userHandler.server.js');
+const RequesHandler = require(path + '/app/controllers/requestHandler.server.js');
 
 module.exports = function (app, passport) {
   function isLoggedIn(req, res, next) {
@@ -15,6 +16,7 @@ module.exports = function (app, passport) {
 
   const bookHadler = new BookHandler();
   const uesrHandler = new UesrHandler();
+  const requestHandler = new RequesHandler();
 
   app.route('/login')
     .get(function (req, res) {
@@ -58,4 +60,7 @@ module.exports = function (app, passport) {
 
   app.route('/delete/:id')
     .get(isLoggedIn, bookHadler.deleteBook);
+
+  app.route('/request/:bookId/:requesterId')
+    .get(isLoggedIn, requestHandler.makeRequest);
 };

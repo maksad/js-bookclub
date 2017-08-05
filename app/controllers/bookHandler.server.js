@@ -81,6 +81,7 @@ function BookHandler() {
   }
 
   this.allBooks = (req, res) => {
+    const message = req.query.message;
     Book
       .find()
       .exec((error, result) => {
@@ -92,7 +93,9 @@ function BookHandler() {
 
         res.render('home', {
           error: errorMessage,
-          books: JSON.stringify(result)
+          books: JSON.stringify(result),
+          userId: req.user ? req.user.twitter.id : null,
+          message: message
         });
       });
   }

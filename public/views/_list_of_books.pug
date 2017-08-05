@@ -29,7 +29,12 @@ style(type='text/css').
         .card-action
           if deleteIsVisible
             a.red-text(href='delete/' + book.id) Delete
-          a.blue-text(href=book.link target='_blank') Link
+          else
+            a.blue-text(
+              href='request/' + book.id + '/' + userId
+            ) Request
+
+          a.blue-text(href=book.link target='_blank') Open
 
 script.
   $(document).ready(function(){

@@ -20,11 +20,6 @@ block content
           .card-content.col.s12
             p= error
 
-  if message
-    .row
-      .col.s12
-        .card.green.lighten-5.col.s12.remove-shadow
-          .card-content.col.s12
-            p= message
 
+  include _message.pug
   include _list_of_books.pug
